@@ -4,31 +4,23 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @Data
 @Table(name = "movie_cinema")
-public class MovieCinema {
+public class MovieCinema extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime dateTime;
 
-    private String date_time;
-
-
-    public MovieCinema(String date_time) {
-        this.date_time = date_time;
-    }
-
-    @ManyToOne
-    private Cinema cinema;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
 
-    @OneToMany(mappedBy = "movieCinema")
-    private List<Ticket> ticket;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cinema cinema;
+
 }

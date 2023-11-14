@@ -2,32 +2,27 @@ package com.tomato.cinemalab.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @Data
+@Getter
+@Setter
 @Table(name = "user_account")
-public class UserAccount {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class UserAccount extends BaseEntity{
 
     private String email;
     private String password;
     private String username;
-    public UserAccount(String email, String password, String username) {
-        this.email = email;
-        this.password = password;
-        this.username = username;
-    }
-    @OneToOne(cascade = CascadeType.ALL)
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_details_id")
     private  AccountDetails accountDetails;
 
-    @OneToMany()
-    private List<Ticket> ticket;
 
 }

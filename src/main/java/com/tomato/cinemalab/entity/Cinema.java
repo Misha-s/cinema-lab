@@ -10,22 +10,11 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Table(name = "cinema")
-public class Cinema {
+public class Cinema extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+   private String  name, sponsoredName;
 
-   private String  name, sponsored_name;
-
-    public Cinema(String name, String sponsored_name) {
-        this.name = name;
-        this.sponsored_name = sponsored_name;
-    }
-
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     private Location location;
 
-    @OneToMany(mappedBy = "cinema")
-    private List<MovieCinema> movieCinema;
 }

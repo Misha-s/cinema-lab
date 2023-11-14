@@ -14,39 +14,24 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Table(name = "movie")
-public class Movie {
+public class Movie extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private int duration;
+    private Integer duration;
     private String name;
     private BigDecimal price;
-    private LocalDate release_date;
-    @Enumerated(EnumType.STRING)
-    private State state;
+    @Column(columnDefinition = "DATE")
+    private LocalDate releaseDate;
+    @Column(columnDefinition = "text")
     private String summary;
     @Enumerated(EnumType.STRING)
     private Type type;
+    @Enumerated(EnumType.STRING)
+    private State state;
 
-    public Movie(int duration, String name, BigDecimal price, LocalDate release_date, State state, String summary, Type type) {
-        this.duration = duration;
-        this.name = name;
-        this.price = price;
-        this.release_date = release_date;
-        this.state = state;
-        this.summary = summary;
-        this.type = type;
-    }
-
-    // movie_cinema_id,
-    @OneToMany(mappedBy = "movie")
-    private List<MovieCinema> movieCinema;
 
     @ManyToMany
     @JoinTable(name = "movie_genre_rel",
-            joinColumns = @JoinColumn(name = "movie_id"),
+            joinColumns = @JoinColumn(name="movie_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private List<Genre> genre;
 

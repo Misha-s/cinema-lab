@@ -11,26 +11,19 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Table(name = "ticket")
-public class Ticket {
+public class Ticket extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int rowNumber;
+    private int seatNumber;
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDate dateTime;
 
-    private int row_number;
-    private int seat_number;
-    private LocalDate date_time;
 
-    public Ticket(int row_number, int seat_number, LocalDate date_time) {
-        this.row_number = row_number;
-        this.seat_number = seat_number;
-        this.date_time = date_time;
-    }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private UserAccount userAccount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private MovieCinema movieCinema;
 
 

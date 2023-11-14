@@ -4,29 +4,16 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
 @NoArgsConstructor
 @Data
 @Table(name = "location")
-public class Location {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Location extends BaseEntity{
 
    private String name, address, postal_code, country, state, city;
+   private BigDecimal latitude, longitude;
 
-    public Location(String name, String address, String postal_code, String country, String state, String city) {
-        this.name = name;
-        this.address = address;
-        this.postal_code = postal_code;
-        this.country = country;
-        this.state = state;
-        this.city = city;
-    }
-
-    @OneToMany(mappedBy = "location")
-    private List<Cinema> cinema;
 }

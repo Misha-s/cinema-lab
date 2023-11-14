@@ -10,14 +10,10 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Table(name = "genre")
-public class Genre {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Genre extends BaseEntity{
 
     private String name;
 
     @ManyToMany(mappedBy = "genre")
-   private List<Movie> movie;
+    private List<Movie> movie;
 }
