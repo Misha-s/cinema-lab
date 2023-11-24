@@ -9,10 +9,9 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
-@Data
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "user_account")
 public class UserAccount extends BaseEntity{
 
@@ -24,5 +23,12 @@ public class UserAccount extends BaseEntity{
     @JoinColumn(name = "account_details_id")
     private  AccountDetails accountDetails;
 
-
+    @Override
+    public String toString() {
+        return "UserAccount{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", username='" + username + '\'' +
+                "} ";
+    }
 }
